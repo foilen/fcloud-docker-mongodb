@@ -1,5 +1,5 @@
 # https://hub.docker.com/r/library/mongo/tags/
-FROM mongo:4.0.12
+FROM mongo:4.0.13
 
 RUN export TERM=dumb ; \
   apt-get update && apt-get install -y \
