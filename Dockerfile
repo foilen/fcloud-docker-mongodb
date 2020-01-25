@@ -1,11 +1,5 @@
 # https://hub.docker.com/r/library/mongo/tags/
-FROM mongo:4.0.13
-
-RUN export TERM=dumb ; \
-  apt-get update && apt-get install -y \
-    haproxy=1.6.3-1ubuntu0.2 \
-    supervisor=3.2.0-2ubuntu0.2 \
-  && apt-get clean && rm -rf /var/lib/apt/lists/*
+FROM mongo:4.2.2
 
 COPY assets /
 CMD chmod 755 /*.sh
