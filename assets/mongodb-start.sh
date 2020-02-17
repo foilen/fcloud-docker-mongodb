@@ -62,16 +62,16 @@ fi
 # Start
 echo Starting
   /usr/bin/mongod \
-    --port 27017 \
+    --bind_ip_all --port 27017 \
     --logpath /var/lib/mongodb/logs/mongod.log \
-    --bind_ip_all \
     --pidfilepath /var/lib/mongodb/pids/mongod.pid \
     --nounixsocket \
     --fork \
     --auth \
     --storageEngine wiredTiger \
     --dbpath /var/lib/mongodb/data/ \
-    --directoryperdb
+    --directoryperdb \
+    --replSet rs
 APP_PID=$(cat /var/lib/mongodb/pids/mongod.pid)
 echo Started
 
