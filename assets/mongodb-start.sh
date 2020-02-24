@@ -75,7 +75,21 @@ echo Starting
 APP_PID=$(cat /var/lib/mongodb/pids/mongod.pid)
 echo Started
 
-
+# Initialize RS if needed
+echo Init RS if needed
+INIT_RS_JS=$(mktemp --suffix=.js)
+cat > $INIT_RS_JS << _EOF
+  var status = rs.status()
+  if (status.code == 94) {
+  	print('RS needs initialization. Init it')
+    rs.initiate()
+  } else {
+  	print('RS is initialized. Skip')
+  }
+_EOF
+/usr/bin/mongo "mongodb://root:${NEW_PASS}@localhost:27017/" $INIT_RS_JS
+rm $INIT_RS_JS
+  
 echo mongod is running with pid $APP_PID and is ready to serve
 while [ -d /proc/$APP_PID ]; do
   sleep 5s
