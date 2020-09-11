@@ -1,5 +1,5 @@
 # https://hub.docker.com/r/library/mongo/tags/
-FROM mongo:4.4.0
+FROM mongo:4.4.1
 
 COPY assets /
 CMD chmod 755 /*.sh
