@@ -11,6 +11,11 @@ mkdir -p /var/lib/mongodb/data/
 mkdir -p /var/lib/mongodb/logs/
 mkdir -p /var/lib/mongodb/pids/
 
+# Create keyfile (derived from root password)
+KEYFILE=/tmp/keyFile
+sha512sum /newPass > $KEYFILE
+chmod 600 $KEYFILE
+
 # Update password if not the same
 if [ "$LAST_PASS" != "$NEW_PASS" ]; then
 
@@ -71,7 +76,8 @@ echo Starting
     --storageEngine wiredTiger \
     --dbpath /var/lib/mongodb/data/ \
     --directoryperdb \
-    --replSet rs
+    --replSet rs \
+    --keyFile $KEYFILE
 APP_PID=$(cat /var/lib/mongodb/pids/mongod.pid)
 echo Started
 
