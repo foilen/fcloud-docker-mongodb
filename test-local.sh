@@ -26,7 +26,7 @@ docker run \
 
 # Wait for it to be ready
 echo Wait for it to be ready
-until docker exec -i $INSTANCE mongo 'mongodb://root:ABC@localhost:27017/' << _EOF
+until docker exec -i $INSTANCE mongosh 'mongodb://root:ABC@localhost:27017/' << _EOF
 _EOF
 do
 sleep 2
@@ -36,5 +36,5 @@ done
 echo ; echo ; echo
 echo Get in
 echo ; echo ; echo
-docker exec -it $INSTANCE mongo 'mongodb://root:ABC@localhost:27017/'
+docker exec -it $INSTANCE mongosh 'mongodb://root:ABC@localhost:27017/'
 
