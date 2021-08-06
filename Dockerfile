@@ -2,6 +2,6 @@
 FROM mongo:5.0.2
 
 COPY assets /
-CMD chmod 755 /*.sh
+RUN chmod 755 /*.sh
 
 CMD /bin/bash
